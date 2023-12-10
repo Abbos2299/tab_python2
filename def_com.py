@@ -6,8 +6,7 @@ from firebase_admin import credentials
 
 
 app = Flask(__name__)
-cred = credentials.Certificate(
-    'tab-tools-firebase-adminsdk-8ncav-4f5ccee9af.json')
+cred = credentials.Certificate('tab-tools-firebase-adminsdk-8ncav-4f5ccee9af.json')
 firebase_admin.initialize_app(cred)
 
 
@@ -21,5 +20,17 @@ def launch_python_file():
 
     return 'Success'
 
+@app.route('/launchcombinefiles', methods=['GET'])
+def launch_combine_files():
+    driver_id = request.args.get('driverId')
+    selected = request.args.get('selected')
+    loadnumber = request.args.get('loadnumber')
+    file_name = request.args.get('fileName')
+
+    subprocess.call([sys.executable, "combine_files.py", driver_id, selected, loadnumber, file_name])
+    
+
+    return 'Successful'
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)
