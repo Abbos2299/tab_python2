@@ -151,5 +151,3 @@ with open(merged_pdf_path, 'rb') as merged_file:
 
 # Remove the temporary merged PDF file
 os.remove(merged_pdf_path)
-
-print(f"File uploaded: {merged_path}")
