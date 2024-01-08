@@ -1,13 +1,1 @@
-[Unit]
-Description=Gunicorn instance to serve def_com
-After=network.target
 
-[Service]
-User=ec2-user
-WorkingDirectory=/home/ec2-user/def_com
-Environment="PATH=/home/ec2-user/def_com/def_comenv/bin"
-Environment="PYTHONPATH=/home/ec2-user/def_com"
-ExecStart=/home/ec2-user/def_com/def_comenv/bin/gunicorn -w 1 -b 0.0.0.0:5000 --timeout 120 def_com:app >> /var/log/def_com.log 2>&1
-
-[Install]
-WantedBy=multi-user.target
